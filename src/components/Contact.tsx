@@ -1,27 +1,56 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const Contact = () => {
-  const onSubmit = async (event:any) => {
+  const [submissionStatus, setSubmissionStatus] = useState<{
+    success: boolean;
+    message: string;
+  }>({ success: false, message: "" });
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+
+    // Type assertion to HTMLFormElement
+    const form = event.currentTarget;
+
+    const formData = new FormData(form);
 
     formData.append("access_key", "017f4eba-24c1-44cd-a001-3226be01c332");
 
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+    try {
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
 
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    }).then((res) => res.json());
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
 
-    if (res.success) {
-      console.log("Success", res);
+      const result = await res.json();
+
+      if (result.success) {
+        setSubmissionStatus({
+          success: true,
+          message: "Your message was sent successfully!",
+        });
+
+        // Correctly reset the form
+        form.reset();
+      } else {
+        setSubmissionStatus({
+          success: false,
+          message: "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      setSubmissionStatus({
+        success: false,
+        message:
+          "An error occurred. Please check your connection and try again.",
+      });
     }
   };
 
@@ -80,23 +109,7 @@ const Contact = () => {
                     required
                   />
                 </div>
-                {/* <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    id="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                </div> */}
+
                 <div>
                   <label
                     htmlFor="message"
@@ -119,6 +132,20 @@ const Contact = () => {
                   Send Message
                 </button>
               </form>
+              {submissionStatus.message && (
+                <div
+                  className={`
+          p-3 rounded mt-2 
+          ${
+            submissionStatus.success
+              ? "bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
+          }
+        `}
+                >
+                  {submissionStatus.message}
+                </div>
+              )}
             </div>
           </div>
 
