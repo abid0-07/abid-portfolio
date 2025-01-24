@@ -76,14 +76,10 @@ I am a passionate and dedicated professional with expertise in **Software Engine
 I would love to connect and collaborate on exciting projects or discuss new opportunities.
 
 - **Email:** abdullahalabid2001@gmail.com
-- **LinkedIn:** [[LinkedIn Profile URL]](https://www.linkedin.com/in/alabid/)
-- **GitHub:** [[GitHub Profile URL]](https://github.com/abid0-07)
-- **Portfolio Website:** [URL]
+- **LinkedIn:** [LinkedIn Profile URL](https://www.linkedin.com/in/alabid/)
+- **GitHub:** [GitHub Profile URL](https://github.com/abid0-07)
+- **Portfolio Website:** [Portfolio](https://abid0-07.github.io/abid-portfolio/)
 
 ## Professional Philosophy
 
 I strive to combine innovation and efficiency in my work. I am committed to lifelong learning, staying updated with the latest industry trends, and leveraging my skills to contribute to meaningful projects. My focus is on creating solutions that are not only effective but also user-centric and sustainable.
-
----
-
-Feel free to modify the placeholders and details to make the README uniquely yours. Let me know if you'd like help customizing it further!
